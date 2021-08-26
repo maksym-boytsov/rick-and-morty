@@ -3,7 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Layout } from 'components/layout';
 import { client } from 'integrations/apollo-client';
 import { Provider as ReduxProvider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { store } from 'store';
 
 import CharacterRoutes from './pages/character/character';
