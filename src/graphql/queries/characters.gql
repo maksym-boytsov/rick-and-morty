@@ -1,0 +1,10 @@
+query characters($page: Int, $name: String, $status: String, $gender: String) {
+  characters(page: $page, filter: { name: $name, status: $status, gender: $gender }) {
+    results {
+      ...characterSmall
+    }
+    info {
+      ...info
+    }
+  }
+}

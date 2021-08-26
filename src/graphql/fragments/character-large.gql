@@ -1,0 +1,15 @@
+fragment characterLarge on Character {
+  ...characterSmall
+  type
+  gender
+  origin {
+    id
+    name
+    dimension
+    type
+  }
+  episode {
+    ...episode
+  }
+  created
+}

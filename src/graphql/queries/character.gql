@@ -1,0 +1,5 @@
+query character($id: ID!) {
+  character(id: $id) {
+    ...characterLarge
+  }
+}

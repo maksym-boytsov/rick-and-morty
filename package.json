@@ -15,16 +15,19 @@
     "graphql": "^15.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "dev": "concurrently \"yarn start\" \"yarn codegen --watch\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +48,10 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.1.1",
+    "@graphql-codegen/typescript": "^2.1.1",
+    "@graphql-codegen/typescript-operations": "^2.1.1",
+    "@graphql-codegen/typescript-react-apollo": "^3.1.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.1",
     "@types/react": "^17.0.19",
@@ -53,6 +60,7 @@
     "@types/react-router-dom": "^5.1.8",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "@typescript-eslint/parser": "^4.29.3",
+    "concurrently": "^6.2.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-alias": "^1.1.2",

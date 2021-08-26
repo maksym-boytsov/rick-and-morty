@@ -1,0 +1,7 @@
+fragment characterSmall on Character {
+  id
+  name
+  status
+  species
+  image
+}

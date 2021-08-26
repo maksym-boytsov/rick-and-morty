@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import CharacterDetails from './pages/character-details';
-import CharacterList from './pages/character-list';
+import CharacterDetails from './pages/character-details/character-details';
+import CharacterList from './pages/character-list/character-list';
 
 const CharacterRoutes = () => {
   return (

@@ -6,7 +6,7 @@ module.exports = {
     sourceType: 'module',
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js, src/graphql/generated/**/*'],
   plugins: ['@typescript-eslint', 'simple-import-sort', 'testing-library', 'jest-dom'],
   extends: [
     'eslint:recommended',
@@ -23,8 +23,7 @@ module.exports = {
     'import/order': 'off',
     'simple-import-sort/imports': 'warn',
     'simple-import-sort/exports': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'no-console': 'error',
+    'no-console': 'warn',
   },
   settings: {
     'import/resolver': {
@@ -38,12 +37,6 @@ module.exports = {
     },
   },
   overrides: [
-    {
-      files: ['*.ts'],
-      rules: {
-        '@typescript-eslint/explicit-function-return-type': ['error'],
-      },
-    },
     {
       files: ['types.ts'],
       rules: {
