@@ -3,7 +3,7 @@ name: Build Application and Deploy Artifacts to GitHub Actions Storage
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: [${TARGET_BRANCH}]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -40,12 +40,12 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with custom script
-        run: ${BUILD_COMMAND}
+        run: 
       - name: Upload an artifact
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: ${OUTPUT_DIR}
+          path: 
   notification:
     runs-on: ubuntu-latest
     needs: [build]
@@ -56,7 +56,7 @@ jobs:
       - name: Notify Fleek
         uses: fjogeleit/http-request-action@v1
         with:
-          url: '${WEBHOOK_URL}'
+          url: ''
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json"}'
           data: '{"status": "${{ steps.check.outputs.status }}", "id": "${{ github.run_id }}"}'
