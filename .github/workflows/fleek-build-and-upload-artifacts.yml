@@ -12,6 +12,7 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    working_directory: .
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -40,12 +41,12 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with custom script
-        run: 
+        run: yarn build
       - name: Upload an artifact
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: 
+          path: build
   notification:
     runs-on: ubuntu-latest
     needs: [build]
@@ -56,7 +57,7 @@ jobs:
       - name: Notify Fleek
         uses: fjogeleit/http-request-action@v1
         with:
-          url: ''
+          url: 'http://localhost:4029'
           method: 'POST'
           customHeaders: '{"Content-Type": "application/json"}'
-          data: '{"status": "${{ steps.check.outputs.status }}", "id": "${{ github.run_id }}"}'
+          data: '{"status": "${{ steps.check.outputs.status }}", "siteDeploymentId": "${{ github.run_id }}"}'
