@@ -55,8 +55,23 @@ jobs:
       - uses: martialonline/workflow-status@v2
         id: check
       - if: steps.check.outputs.status == 'success'
-        run: echo "Build succeeded"
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{\n    \"operationName\": \"FinishSiteDeployment\",\n    \"query\": \"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!, $cicdPluginInstance: ID!, $storagePluginInstance: ID!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n    cicdPluginInstance: $cicdPluginInstance\n    storagePluginInstance: $storagePluginInstance\n  ) {\n    id\n  }\n}\",\n    \"variables\": {\n        \"build\": \"${{ github.run_id }}\",\n        \"status\": \"SUCCEEDED\",\n        }\n}'
       - if: steps.check.outputs.status == 'failure'
-        run: echo "Build failed"
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{\n    \"operationName\": \"FinishSiteDeployment\",\n    \"query\": \"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!, $cicdPluginInstance: ID!, $storagePluginInstance: ID!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n    cicdPluginInstance: $cicdPluginInstance\n    storagePluginInstance: $storagePluginInstance\n  ) {\n    id\n  }\n}\",\n    \"variables\": {\n        \"build\": \"${{ github.run_id }}\",\n        \"status\": \"FAILED\",\n        }\n}'
       - if: steps.check.outputs.status == 'cancelled'
-        run: echo "Build cancelled"
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{\n    \"operationName\": \"FinishSiteDeployment\",\n    \"query\": \"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!, $cicdPluginInstance: ID!, $storagePluginInstance: ID!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n    cicdPluginInstance: $cicdPluginInstance\n    storagePluginInstance: $storagePluginInstance\n  ) {\n    id\n  }\n}\",\n    \"variables\": {\n        \"build\": \"${{ github.run_id }}\",\n        \"status\": \"STOPPED\",\n        }\n}'
