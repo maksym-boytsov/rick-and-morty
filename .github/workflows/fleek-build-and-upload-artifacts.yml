@@ -59,14 +59,14 @@ jobs:
         with:
           url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
           method: 'POST'
-          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ github.run_id }}","status":"STOPPED"}}'
+          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ github.run_id }}","status":"SUCCEEDED"}}'
           timeout: '10000'
       - if: steps.check.outputs.status == 'failure'
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
           method: 'POST'
-          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ github.run_id }}","status":"STOPPED"}}'
+          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ github.run_id }}","status":"FAILED"}}'
           timeout: '10000'
       - if: steps.check.outputs.status == 'cancelled'
         uses: fjogeleit/http-request-action@v1
