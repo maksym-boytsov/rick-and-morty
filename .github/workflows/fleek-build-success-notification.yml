@@ -1,0 +1,27 @@
+name: Fleek ⚡️ Build Success Notification
+
+on:
+  workflow_run:
+    workflows: ["Fleek ⚡️ Build and Upload Artifacts"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+      - name: Notify Fleek API of build success
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
+          method: 'POST'
+          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ context.payload.workflow_run.id }}","status":"SUCCEEDED"}}'
+          timeout: '20000'
