@@ -23,5 +23,5 @@ jobs:
         with:
           url: 'https://seahorse-app-sjyj7.ondigitalocean.app/graphql'
           method: 'POST'
-          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ context.payload.workflow_run.id }}","status":"SUCCEEDED"}}'
+          data: '{"operationName":"FinishSiteDeployment","query":"mutation FinishSiteDeployment($build: ID!, $status: PluginCICDBuildStatus!) {\n  finishSiteDeployment(\n    build: $build\n    status: $status\n  ) {\n    id\n  }\n}","variables":{"build":"${{ github.event.workflow_run.id }}","status":"SUCCEEDED"}}'
           timeout: '20000'
