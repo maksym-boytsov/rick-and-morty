@@ -2,7 +2,7 @@ name: Fleek ⚡️ Build Success Notification
 
 on:
   workflow_run:
-    workflows: ["Fleek ⚡️ Build and Upload Artifacts"]
+    workflows: ["Fleek ⚡️ Build and Upload Artifact"]
     types:
       - completed
 
